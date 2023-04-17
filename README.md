@@ -20,3 +20,4 @@
 ## POSTMAN 
 В папке лежит описание __REST API__
 1. Конфигурационный файл (можно открыть в Postman)
+[Documentation](https://documenter.getpostman.com/view/17886459/2s93XyUiLi)
