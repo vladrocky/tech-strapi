@@ -1,0 +1,862 @@
+{
+	"info": {
+		"_postman_id": "883b8a6d-96cf-407f-b07b-41359fad09fa",
+		"name": "API Долгострочного задания",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17886459"
+	},
+	"item": [
+		{
+			"name": "Неавторизованный пользователь",
+			"item": [
+				{
+					"name": "Лайки",
+					"item": [
+						{
+							"name": "Узнать количество лайков",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/likes?populate=*",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"likes"
+									],
+									"query": [
+										{
+											"key": "populate",
+											"value": "*"
+										},
+										{
+											"key": "populate",
+											"value": "post: {data:message,filters:{id:{$eq:1}}",
+											"disabled": true
+										},
+										{
+											"key": "populate",
+											"value": "post:[message]",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Добавить лайк к первому посту",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"count = pm.globals.get(\"count likes 1 post\");\r",
+											"count++\r",
+											"pm.globals.set(\"count likes 1 post\", count);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Body matches string\", function () {\r",
+											"    if (pm.expect(pm.response.text()).to.include(\"error\")){\r",
+											"        count = pm.globals.get(\"count likes 1 post\");\r",
+											"        count--\r",
+											"        pm.globals.set(\"count likes 1 post\", count);\r",
+											"    }\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "6d5bf835116756da41e9defcb8cbac74f4485d5681e76fb472c51f1f937f2d47fdadb507f0080ddf414579ed7adc96fe671e62f5082504576fef0a6a966547dcd15123b7ebf2da7f404b15fa4f914942cfc52b391a17e8581c3a16eacb5514a774f1e91232688be0758b428b245b517084aedb4f8d5242aca0ce2d419e067c8d",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"attributes\":\r\n    {\r\n        \"count\": 3\r\n    }\r\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/likes/1",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"likes",
+										"1"
+									],
+									"query": [
+										{
+											"key": "count",
+											"value": "{{count likes 1 post}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Удалить лайк у первого поста",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"count = pm.globals.get(\"count likes 1 post\");\r",
+											"count++\r",
+											"pm.globals.set(\"count likes 1 post\", count);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Body matches string\", function () {\r",
+											"    if (pm.expect(pm.response.text()).to.include(\"error\")){\r",
+											"        count = pm.globals.get(\"count likes 1 post\");\r",
+											"        count--\r",
+											"        pm.globals.set(\"count likes 1 post\", count);\r",
+											"    }\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "6d5bf835116756da41e9defcb8cbac74f4485d5681e76fb472c51f1f937f2d47fdadb507f0080ddf414579ed7adc96fe671e62f5082504576fef0a6a966547dcd15123b7ebf2da7f404b15fa4f914942cfc52b391a17e8581c3a16eacb5514a774f1e91232688be0758b428b245b517084aedb4f8d5242aca0ce2d419e067c8d",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"attributes\":\r\n    {\r\n        \"count\": 3\r\n    }\r\n} ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/likes/1",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"likes",
+										"1"
+									],
+									"query": [
+										{
+											"key": "count",
+											"value": "{{count likes 1 post}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Просмотр новостной ленты",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/feed?populate=*",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"feed"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "*"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Просмотр одного поста",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/posts/1?populate=like&populate=comments&populate=users_permissions_user&populate=image",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"posts",
+								"1"
+							],
+							"query": [
+								{
+									"key": "populate",
+									"value": "like"
+								},
+								{
+									"key": "populate",
+									"value": "comments"
+								},
+								{
+									"key": "populate",
+									"value": "users_permissions_user"
+								},
+								{
+									"key": "populate",
+									"value": "image"
+								},
+								{
+									"key": "populate",
+									"value": "*",
+									"description": "смотреть все данные",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Просмотр всех комментариев",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/comments",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Просмотр спика пользователей",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/users",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Авторизованный пользователь",
+			"item": [
+				{
+					"name": "Логин и Регистрация",
+					"item": [
+						{
+							"name": "Регистрация пользователя",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"reguser2\",\r\n    \"email\":\"reguser2@reguser.com\",\r\n    \"password\":\"reguserpwd2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/auth/local/register",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"auth",
+										"local",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Аутентификация",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Have jwt token?\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.jwt).to.not.empty;\r",
+											"});\r",
+											"pm.test(\"Have profile data?\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.user).to.not.empty;\r",
+											"});\r",
+											"pm.test(\"Save token to global\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.user).to.not.empty;\r",
+											"\r",
+											"    pm.globals.set(\"jwt_dz\", jsonData.jwt);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identifier\":\"Vasya\",\r\n    \"password\":\"12345vasya\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/auth/local",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"auth",
+										"local"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Новостная лента",
+					"item": [
+						{
+							"name": "Просмотр новостной ленты",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{jwt_dz}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{localhost}}/feed?populate=posts",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"feed"
+									],
+									"query": [
+										{
+											"key": "populate",
+											"value": "posts"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Лайки",
+					"item": [
+						{
+							"name": "Узнать количество лайков поста",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"get count like by id\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.globals.set(\"count likes 1 post\", jsonData.data.attributes.count);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{jwt_dz}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/likes/1",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"likes",
+										"1"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Добавить лайк к первому посту",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"count = pm.globals.get(\"count likes 1 post\");\r",
+											"count++\r",
+											"pm.globals.set(\"count likes 1 post\", count);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Body matches string\", function () {\r",
+											"    if (pm.expect(pm.response.text()).to.include(\"error\")){\r",
+											"        count = pm.globals.get(\"count likes 1 post\");\r",
+											"        count--\r",
+											"        pm.globals.set(\"count likes 1 post\", count);\r",
+											"    }\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{jwt_dz}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"data\": {\r\n    \"count\":{{count likes 1 post}}\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/likes/1",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"likes",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Удалить лайк первого поста",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"count = pm.globals.get(\"count likes 1 post\");\r",
+											"count--\r",
+											"pm.globals.set(\"count likes 1 post\", count);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Body matches string\", function () {\r",
+											"    if (pm.expect(pm.response.text()).to.include(\"error\")){\r",
+											"        count = pm.globals.get(\"count likes 1 post\");\r",
+											"        count++\r",
+											"        pm.globals.set(\"count likes 1 post\", count);\r",
+											"    }\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"data\": {\r\n    \"count\":{{count likes 1 post}}\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/likes/1",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"likes",
+										"1"
+									],
+									"query": [
+										{
+											"key": "count",
+											"value": "{{count likes 1 post}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Комментарии",
+					"item": [
+						{
+							"name": "Просмотр комментариев",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{jwt_dz}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{localhost}}/comments?populate=*",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"comments"
+									],
+									"query": [
+										{
+											"key": "populate",
+											"value": "*"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Добавить комментарий",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{jwt_dz}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\":{\r\n        \"message\": \"new comment\",\r\n        \"post\":{\r\n            \"id\":1\r\n        },\r\n        \"users_permissions_user\":{\r\n            \"id\":1\r\n        }\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/comments",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"comments"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Посты",
+					"item": [
+						{
+							"name": "Создать пост",
+							"item": [
+								{
+									"name": "Получить информацию о себе",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer {{jwt_dz}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{localhost}}/users/me",
+											"host": [
+												"{{localhost}}"
+											],
+											"path": [
+												"users",
+												"me"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Загрузить файл",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer {{jwt_dz}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "files",
+													"type": "file",
+													"src": "/C:/Users/User/Desktop/nodejs.png"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{localhost}}/upload",
+											"host": [
+												"{{localhost}}"
+											],
+											"path": [
+												"upload"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Добавить пост",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer {{jwt_dz}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"data\":{\r\n        \"message\":\"hei\",\r\n        \"image\":{\r\n            \"id\":4\r\n        },\r\n        \"users_permissions_user\": {\r\n                    \"id\": 1\r\n                }\r\n\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{localhost}}/posts",
+											"host": [
+												"{{localhost}}"
+											],
+											"path": [
+												"posts"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Прикремпить пост в ленту",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer {{jwt_dz}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"data\":{\r\n        \"posts\":[\r\n            {\r\n                \"id\":5\r\n            },\r\n            {\r\n                \"id\":1\r\n            },\r\n            {\r\n                \"id\":2\r\n            }\r\n        ]\r\n        \r\n    }\r\n    \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{localhost}}/feed",
+											"host": [
+												"{{localhost}}"
+											],
+											"path": [
+												"feed"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Просмотр постов",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{jwt_dz}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{localhost}}/posts?populate=image",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"posts"
+									],
+									"query": [
+										{
+											"key": "populate",
+											"value": "image",
+											"description": "посты с картинками"
+										},
+										{
+											"key": "populate",
+											"value": "*",
+											"description": "посты со всей информацией",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Администратор",
+			"item": []
+		}
+	]
+}
